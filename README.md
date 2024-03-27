@@ -11,4 +11,4 @@ To-Do List:
   - [ ] F: Poriešiť databázu
   - [ ] F: Deploynúť model na Azure
   - [ ] F: Nájsť a nasadiť dataset na Azure
-  - [ ] spraviť dokumentáciu - slovný rozbor a analýzu úlohy, odôvodnenie zvolených technológií, jednoduchý diagram použitých služieb a ich prepojenia, rozpísaný príspevok jednotlivých členov teamu k funkčnosti riešenia, dokumentáciu k používaniu aplikácie (setup, spustenie, vstupy, výstupy)
+  - [ ] J: spraviť dokumentáciu - slovný rozbor a analýzu úlohy, odôvodnenie zvolených technológií, jednoduchý diagram použitých služieb a ich prepojenia, rozpísaný príspevok jednotlivých členov teamu k funkčnosti riešenia, dokumentáciu k používaniu aplikácie (setup, spustenie, vstupy, výstupy)
