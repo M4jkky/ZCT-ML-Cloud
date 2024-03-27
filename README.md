@@ -9,5 +9,4 @@ To-Do List:
   - [ ] J: UX/UI stránky
   - [ ] P: Flask backend AWS - spojiť model (Azure ML) do AWS backend (pravdepodobne Flask)
   - [ ] F: Poriešiť databázu
-  - [ ] M: nahodiť neurónku do Azure ML
   - [ ] F: Deploynúť model na Azure
