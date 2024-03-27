@@ -2,4 +2,4 @@
 To-Do List:
   - [x] plakať
   - [ ] M: lokálne natrénovať sign language na testovanie
-  - [ ] M: písať bakalárku
+  - [ ] M, F, P, J: písať bakalárku
