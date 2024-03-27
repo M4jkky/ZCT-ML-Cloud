@@ -6,5 +6,5 @@ To-Do List:
   - [x] F: MS Azure workspace
   - [x] F: MS Azure workspace konfigurácia
   - [ ] J: UX/UI stránky
-  - [ ]  : AWS worskpace
+  - [ ] F: AWS worskpace
   - [ ] P: Flask backend
