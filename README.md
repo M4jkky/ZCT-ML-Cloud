@@ -12,4 +12,4 @@ To-Do List:
   - [ ] F: Deploynúť model na Azure
   - [ ] F: Nájsť a nasadiť dataset na Azure
   - [ ] J: spraviť dokumentáciu - slovný rozbor a analýzu úlohy, odôvodnenie zvolených technológií, jednoduchý diagram použitých služieb a ich prepojenia, rozpísaný príspevok jednotlivých členov teamu k funkčnosti riešenia, dokumentáciu k používaniu aplikácie (setup, spustenie, vstupy, výstupy)
-  - [ ] F: Spojiť Azure s AwS
+  - [ ] F: Spojiť Azure s AWS
