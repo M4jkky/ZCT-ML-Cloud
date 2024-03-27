@@ -10,3 +10,4 @@ To-Do List:
   - [ ] P: Flask backend AWS - spojiť model (Azure ML) do AWS backend (pravdepodobne Flask)
   - [ ] F: Poriešiť databázu
   - [ ] F: Deploynúť model na Azure
+  - [ ] F: Nájsť a nasadiť dataset na Azure
