@@ -5,3 +5,6 @@ To-Do List:
   - [ ] M, F, P, J: písať bakalárku
   - [x] F: MS Azure workspace
   - [x] F: MS Azure workspace konfigurácia
+  - [ ] J: UX/UI stránky
+  - [ ]  : AWS worskpace
+  - [ ] P: Flask backend
