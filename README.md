@@ -4,7 +4,7 @@ To-Do List:
   - [ ] M F P J: písať bakalárku
   - [x] M: lokálne natrénovať sign language na vyskúšanie
   - [x] M: Vytvorenie dátovej množiny
-  - [ ] M: Deploynúť model na Azure
+  - [ ] F: Deploynúť model na Azure
   - [x] F: MS Azure workspace
   - [x] F: MS Azure workspace konfigurácia
   - [ ] F: AWS worskpace
