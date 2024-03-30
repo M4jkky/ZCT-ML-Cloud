@@ -8,7 +8,6 @@ To-Do List:
   - [x] F: MS Azure workspace
   - [x] F: MS Azure workspace konfigurácia
   - [ ] F: AWS worskpace
-  - [ ] F: Prepojenie Azure s AWS
   - [ ] J: UX/UI stránky
   - [ ] J: spraviť dokumentáciu - slovný rozbor a analýzu úlohy, odôvodnenie zvolených technológií, jednoduchý diagram použitých služieb a ich prepojenia, rozpísaný príspevok               jednotlivých členov teamu k funkčnosti riešenia, dokumentáciu k používaniu aplikácie (setup, spustenie, vstupy, výstupy)
   - [ ] P: Flask backend AWS
