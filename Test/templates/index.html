@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idk</title>
+</head>
+<body>
+    <p>Character: <span id="Character">Loading...</span></p>
+    <img src="{{ url_for('video_feed') }}" alt="Video Feed">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('character', function (data) {
+            var heartRateElement = document.getElementById('Character');
+            heartRateElement.innerText = data.value;
+            heartRateElement.style.animation = 'scaleUp 0.5s ease-in-out';
+        });
+    </script>
+</body>
+</html>
