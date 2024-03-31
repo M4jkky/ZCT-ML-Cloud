@@ -3,7 +3,7 @@ import pickle
 import cv2
 import os
 
-DATA_DIR = '../new_data'
+DATA_DIR = '../data_v2'
 PICKLE_FILE = 'misc/data.pickle'
 MP_HANDS = mp.solutions.hands
 MP_DRAWING = mp.solutions.drawing_utils

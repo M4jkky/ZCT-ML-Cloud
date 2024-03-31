@@ -1,7 +1,7 @@
 import cv2
 import os
 
-DATA_DIR = '../new_data'
+DATA_DIR = '../data_v2'
 NUM_CLASSES = 30
 DATASET_SIZE = 250
 CAPTURE_KEY = 'c'
