@@ -41,6 +41,7 @@ hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3)
 # Inicializácia premenných na zapisovanie textu do súboru
 previous_sentence = ""  # Kópia sentence, aby sa neplnila konzola za každým frame-om
 sentence = ""  # Premenná, ktorá bude neskôr použitá na front-end predikciu
+threshold = 22  # Počet frame-ov, ktoré musia prejsť, aby sa písmeno zapísalo do vety
 hold_counter = 0  # Počítadlo, ktoré zabezpečuje, že sa nezmení písmeno príliš rýchlo
 no_hand_counter = 0  # Počítadlo, ktoré zapisuje do súboru, neskôr na výslednej stránke ak nebude detekovaná ruka nastane text-to-speech
 predicted_character_counter = 0  # Počítadlo, ktoré zabezpečuje, aby sa po určitej dobe na výslednej stránke zapísalo písmeno do vety
@@ -99,7 +100,7 @@ while True:
             prediction = model.predict([np.asarray(data_aux)])
 
             predicted_character = labels_dict[str(int(prediction[0]))]
-            displayed_character = predicted_character  # kvôli space-u aby sa zobrazoval na obrazovke
+            displayed_character = predicted_character  # aby sa nezobrazovalo „Space“ / „Delete“ v texte iba na kamere
 
             if predicted_character == "Space":
                 predicted_character = " "
@@ -109,6 +110,19 @@ while True:
                 predicted_character_counter = 0
 
             predicted_character_counter += 1
+            hold_counter += 1
+
+            if predicted_character == "Delete" and predicted_character_counter > threshold:
+                predicted_character = ""
+                if sentence.endswith("Hello"):
+                    sentence = sentence[:-5]
+                elif sentence.endswith("ILY"):
+                    sentence = sentence[:-3]
+                elif sentence.endswith("PEWPEW"):
+                    sentence = sentence[:-6]
+                else:
+                    sentence = sentence[:-1]
+                displayed_character = "Delete"
 
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 80, 0), 1)
             if predicted_character != " ":
@@ -118,10 +132,10 @@ while True:
                 cv2.putText(frame, displayed_character, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.3, (0, 0, 0), 2,
                             cv2.LINE_AA)
 
-            if not sentence and predicted_character_counter > 20:
+            if not sentence and predicted_character_counter > threshold and displayed_character != "Delete":
                 sentence += predicted_character
                 predicted_character_counter = 0
-            elif predicted_character_counter > 20:
+            elif predicted_character_counter > threshold:
                 sentence += predicted_character
                 predicted_character_counter = 0
 
@@ -129,11 +143,9 @@ while True:
                 print(sentence)
                 previous_sentence = sentence
 
-            if hold_counter > 7:
+            if hold_counter > 10:
                 last_predicted_character = predicted_character
                 hold_counter = 0
-
-            hold_counter += 1
 
         except ValueError as e:
             print(f"An error occurred: {e}")
