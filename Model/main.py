@@ -9,7 +9,7 @@ file = open("predicted_sentences.txt", "a")
 
 # Load the model from pickle file
 try:
-    model_dict = pickle.load(open('./misc/model_v1.pkl', 'rb'))
+    model_dict = pickle.load(open('./misc/model.pkl', 'rb'))
     model = model_dict['model']
 except FileNotFoundError:
     print("Model file not found. Please ensure the file path is correct.")
@@ -97,9 +97,9 @@ while True:
         y2 = int(max(y_) * H) - 2
 
         try:
-            prediction = model.predict([np.asarray(data_aux)])
-
-            predicted_character = labels_dict[str(int(prediction[0]))]
+            data_aux_2d = np.array(data_aux).reshape(1, -1)
+            prediction = model.predict(data_aux_2d)
+            predicted_character = labels_dict[str(int(prediction))]
             displayed_character = predicted_character  # aby sa nezobrazovalo „Space“ / „Delete“ v texte iba na kamere
 
             if predicted_character == "Space":
@@ -124,7 +124,7 @@ while True:
                     sentence = sentence[:-1]
                 displayed_character = "Delete"
 
-            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 80, 0), 1)
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 0), 1)
             if predicted_character != " ":
                 cv2.putText(frame, predicted_character, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.3, (0, 0, 0), 2,
                             cv2.LINE_AA)
@@ -152,7 +152,7 @@ while True:
     else:
         no_hand_counter += 1
 
-    if no_hand_counter >= 40 and sentence != "":
+    if no_hand_counter >= 30 and sentence != "":
         file.write(sentence + "\n")
         print("written to file")
         sentence = ""
