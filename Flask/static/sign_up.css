@@ -1,0 +1,509 @@
+/* MacBook Air - 5 */
+.body{
+    background: #EDF6F9;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    margin: 0vh;
+    padding: 0vh;
+}
+
+.animate-ellipse-right {
+    animation: moveEllipseRight 1s forwards;
+    opacity: 0;
+}
+/* Keyframes */
+@keyframes moveEllipseRight {
+    0% {
+        transform: translateX(100vw) translateY(100vh);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-ellipse-left {
+    animation: moveEllipseLeft 1s forwards;
+    opacity: 0;
+}
+/* Keyframes */
+@keyframes moveEllipseLeft {
+    0% {
+        transform: translateX(-100vw) translateY(100vh);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Ellipse 31 -done */
+.ellipse31{
+    position: absolute;
+    width: 12vw;
+    height: 22vh;
+    left: 55vw;
+    top: 90vh;
+    border-radius: 50%;
+    background: #FFDDD2;
+    box-shadow: 0 1vh 1vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.15s;
+}
+
+
+/* Ellipse 35 -done */
+.ellipse35{
+    position: absolute;
+    width: 20vw;
+    height: 42vh;
+    left: -6vw;
+    top: 18vh;
+    border-radius: 50%;
+    background: #FFDDD2;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.3s;
+}
+
+/* Ellipse 36 -done */
+.ellipse36 {
+    position: absolute;
+    width: 20vw;
+    height: 42vh;
+    left: 10vw;
+    top: 35vh;
+    border-radius: 50%;
+    background: #FFDDD2;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.45s;
+}
+
+
+/* Ellipse 37 - done */
+.ellipse37{
+    position: absolute;
+    width: 20vw;
+    height: 42vh;
+    left: 13vw;
+    top: 70vh;
+    border-radius: 50%;
+    background: #FFDDD2;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.3s;
+}
+
+/* Ellipse 38 -done */
+
+.ellipse38{
+    position: absolute;
+    width: 20vw;
+    height: 42vh;
+    left: 25vw;
+    top: 92vh;
+    border-radius: 50%;
+    background: #FFDDD2;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.15s;
+}
+
+
+/* Ellipse 39 -done */
+.ellipse39{
+    position: absolute;
+    width: 20vw;
+    height: 42vh;
+    left: 40vw;
+    top: 95vh;
+    border-radius: 50%;
+    background: #FFDDD2;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.45s;
+}
+
+/* Ellipse 32 - done */
+.ellipse32{
+    position: absolute;
+    width: 20vw;
+    height: 42vh;
+    left: 62vw;
+    top: 65vh;
+    border-radius: 50%;
+    background: #FFDDD2;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.45s;
+}
+
+/* Ellipse 33 - done */
+.ellipse33{
+    position: absolute;
+    width: 20vw;
+    height: 42vh;
+    left: 77vw;
+    top: 52vh;
+    border-radius: 50%;
+    background: #FFDDD2;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.15s;
+}
+
+/* Ellipse 34 - done */
+.ellipse34{
+    position: absolute;
+    width: 20vw;
+    height: 42vh;
+    left: 85vw;
+    top: 19vh;
+    border-radius: 50%;
+    background: #FFDDD2;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.15s;
+}
+
+
+
+/* Ellipse 28 - done */
+.ellipse28{
+    position: absolute;
+    width: 25vw;
+    height: 47vh;
+    left: 63vw;
+    top: 75vh;
+    border-radius: 50%;
+    background: #E29578;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.3s;
+}
+
+/* Ellipse 29 - done*/
+.ellipse29{
+    position: absolute;
+    width: 27.5vw;
+    height: 52vh;
+    left: 83vw;
+    top: 68vh;
+    border-radius: 50%;
+    background: #E29578;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.45s;
+}
+
+/* Ellipse 30 - done*/
+.ellipse30{
+    position: absolute;
+    width: 18vw;
+    height: 35vh;
+    left: 90vw;
+    top: 40vh;
+    border-radius: 50%;
+    background: #E29578;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.15s;
+}
+
+/* Ellipse 42 -done */
+.ellipse42{
+    position: absolute;
+    width: 18vw;
+    height: 35vh;
+    left: 17vw;
+    top: 87vh;
+    border-radius: 50%;
+    background: #E29578;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.45s;
+}
+
+/* Ellipse 43 -done*/
+.ellipse43{
+    position: absolute;
+    width: 13vw;
+    height: 30vh;
+    left: 30vw;
+    top: 98vh;
+    border-radius: 50%;
+    background: #E29578;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.3s;
+}
+
+
+/* Ellipse 45 - done */
+.ellipse45{
+    position: absolute;
+    width: 14vw;
+    height: 28vh;
+    left: 56vw;
+    top: 95vh;
+    border-radius: 50%;
+    background: #E29578;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.3s;
+}
+
+/* Ellipse 40 - done*/
+.ellipse40{
+    position: absolute;
+    width: 24vw;
+    height: 49vh;
+    left: -11vw;
+    top: 32vh;
+    border-radius: 50%;
+    background: #E29578;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.45s;
+}
+
+/* Ellipse 44 - done*/
+.ellipse44{
+    position: absolute;
+    width: 20vw;
+    height: 41vh;
+    left: 5vw;
+    top: 52vh;
+    border-radius: 50%;
+    background: #E29578;
+    box-shadow: 0 1.23vh 1.23vh rgba(0, 0, 0, 0.25);
+    animation-delay: 0.15s;
+}
+
+/* Ellipse 41 - done ? */
+.ellipse41{
+    position: absolute;
+    width: 29vw;
+    height: 65vh;
+    left: -6vw;
+    top: 75vh;
+    border-radius: 50%;
+    background: #E29578;
+    box-shadow: 1.38vw 1.38vw 1.38vw rgba(0, 0, 0, 0.25);
+    animation-delay: 0.3s;
+}
+
+
+
+.hide-ellipse-left {
+    animation: hideEllipseLeft 1s forwards;
+}
+
+@keyframes hideEllipseLeft {
+    from {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-50vw) translateY(-50vh);
+        opacity: 0;
+    }
+}
+
+.hide-ellipse-right {
+    animation: hideEllipseRight 1s forwards;
+}
+
+@keyframes hideEllipseRight {
+    from {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(50vw) translateY(50vh);
+        opacity: 0;
+    }
+}
+
+.animate-box {
+    animation: MoveBox 1s forwards;
+    opacity: 0;
+}
+@keyframes MoveBox {
+    0% {
+        transform: translateX(0vw) translateY(100vh);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+    }
+
+}
+/* Rectangle 9- done */
+.login_box{
+    position: absolute;
+    width: 30vw;
+    height: 62vh;
+    left: 35vw;
+    top: 26vh;
+    background: #006D77;
+    box-shadow: inset 0 0 0.5vw 0.5vw rgba(0, 0, 0, 0.125);
+    border-radius: 3vw;
+}
+
+
+
+/* Rectangle 5 */
+.sign_button[type=submit]{
+    position: absolute;
+    margin: auto;
+    width: 16vw;
+    height: 6vh;
+    left: 42vw;
+    top: 74vh;
+    border-width: 0;
+    background: #83C5BE;
+    box-shadow: inset 0 0.56vw 0.56vw rgba(0, 0, 0, 0.25);
+    border-radius: 3.47vw;
+    z-index: 2;
+    text-align: center;
+    font-size: 1.4vw;
+    font-family: 'Inter';
+    line-height: 6vh;
+    cursor: pointer;
+}
+
+.sign_button[type = submit]:hover{
+    background-color: #E29578;
+}
+
+.sign_please{
+    position: absolute;
+    width: 20vw;
+    height: 4vh;
+    left: 40vw;
+    top: 34vh;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2vw;
+    line-height: 2vh;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+/* Rectangle 10 */
+.username_box_input[type = text]{
+    position: absolute;
+    margin: auto;
+    width: 20vw;
+    height: 6vh;
+    left: 40vw;
+    top: 44vh;
+    background: #D9D9D9;
+    border-radius: 3.47vw;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 1vw;
+    line-height: 6vh;
+    text-align: start;
+    padding-left: 1vw;
+    color: rgba(0, 0, 0, 0.5);
+    border-width: 0;
+}
+
+/* Rectangle 11 */
+.password_box_input[type = password]{
+    position: absolute;
+    margin: auto;
+    width: 20vw;
+    height: 6vh;
+    left: 40vw;
+    top: 54vh;
+    background: #D9D9D9;
+    border-radius: 3.47vw;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 200;
+    display: flex;
+    text-align: left;
+    font-size: 1vw;
+    line-height: 6vh;
+    padding-left: 1vw;
+    color: rgba(0, 0, 0, 0.5);
+    border-width: 0;
+}
+
+.confirm_password_box_input[type = password]{
+    position: absolute;
+    margin: auto;
+    width: 20vw;
+    height: 6vh;
+    left: 40vw;
+    top: 64vh;
+    background: #D9D9D9;
+    border-radius: 3.47vw;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 200;
+    display: flex;
+    text-align: left;
+    font-size: 1vw;
+    line-height: 6vh;
+    padding-left: 1vw;
+    color: rgba(0, 0, 0, 0.5);
+    border-width: 0;
+}
+
+
+label {
+    position: absolute;
+}
+
+label[for="user"] {
+    top: 48vh; /* Nastaví pozíciu pre label "Username" */
+}
+
+label[for="pass"] {
+    top: 56vh; /* Nastaví pozíciu pre label "Password" */
+}
+
+
+
+
+/* Section 1 - done */
+.header {
+    box-sizing: border-box;
+    position: relative;
+    width: 100vw;
+    height: 14vh;
+    box-shadow: 0 0 0.69vh rgba(0, 0, 0, 0.25);
+    background: #EDF6F9;
+    border: 0.07vw solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    transform: translateY(-100%);
+}
+
+
+/* SIGNTALKER - done */
+.sign {
+    position: absolute;
+    width: 24.31vw;
+    height: 8vh;
+    left: 3.75vw;
+    top: 3vh;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2.08vw;
+    line-height: 8.5vh;
+    color: #000000;
+    cursor: pointer;
+    background-color: #EDF6F9;
+}
+
+
+.animate-header {
+    animation: moveHeader 1s forwards;
+}
+
+@keyframes moveHeader {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
