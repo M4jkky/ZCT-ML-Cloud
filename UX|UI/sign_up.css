@@ -342,29 +342,16 @@
     border-radius: 3vw;
 }
 
-/* Welcome - done */
-.welcome_sign{
-    position: absolute;
-    width: 10vw;
-    height: 4vh;
-    left: 44vw;
-    top: 34vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 3vw;
-    line-height: 3vh;
-    color: #FFFFFF;
-}
+
 
 /* Rectangle 5 */
-.continue_button{
+.sign_button[type=submit]{
     position: absolute;
     margin: auto;
     width: 16vw;
     height: 6vh;
     left: 42vw;
-    top: 70vh;
+    top: 74vh;
     border-width: 0;
     background: #83C5BE;
     box-shadow: inset 0 0.56vw 0.56vw rgba(0, 0, 0, 0.25);
@@ -375,9 +362,24 @@
     font-family: monospace;
     line-height: 6vh;
 }
-.continue_button:hover {
-    background-color: #006D77;
-    color: white;
+
+.sign_button[type = submit]:hover{
+    background-color: #E29578;
+}
+
+.sign_please{
+    position: absolute;
+    width: 20vw;
+    height: 4vh;
+    left: 40vw;
+    top: 34vh;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2vw;
+    line-height: 2vh;
+    text-align: center;
+    color: #FFFFFF;
 }
 
 /* Rectangle 10 */
@@ -387,7 +389,7 @@
     width: 20vw;
     height: 6vh;
     left: 40vw;
-    top: 48vh;
+    top: 44vh;
     background: #D9D9D9;
     border-radius: 3.47vw;
     font-family: 'Inter';
@@ -408,7 +410,7 @@
     width: 20vw;
     height: 6vh;
     left: 40vw;
-    top: 56vh;
+    top: 54vh;
     background: #D9D9D9;
     border-radius: 3.47vw;
     font-family: 'Inter';
@@ -423,27 +425,42 @@
     border-width: 0;
 }
 
-/* Don’t have an account ? Sign up */
-.sign_up_sign{
+.confirm_password_box_input[type = password]{
     position: absolute;
-    width: 21vw;
-    height: 3vh;
+    margin: auto;
+    width: 20vw;
+    height: 6vh;
     left: 40vw;
-    top: 78vh;
+    top: 64vh;
+    background: #D9D9D9;
+    border-radius: 3.47vw;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 200;
+    display: flex;
+    text-align: left;
     font-size: 1vw;
-    line-height: 2vh;
-    color: rgba(255, 255, 255, 0.75);
-    background: #006D77;
+    line-height: 6vh;
+    padding-left: 1vw;
+    color: rgba(0, 0, 0, 0.5);
     border-width: 0;
 }
-.sign_up_sign:hover {
-    color: white;
-    font-weight: bolder;
-    text-underline: #FFFFFF;
+
+
+label {
+    position: absolute;
 }
+
+label[for="user"] {
+    top: 48vh; /* Nastaví pozíciu pre label "Username" */
+}
+
+label[for="pass"] {
+    top: 56vh; /* Nastaví pozíciu pre label "Password" */
+}
+
+
+
 
 /* Section 1 - done */
 .header {

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="sign_up.css">
     <div class="header animate-header"></div>
     <div class="sign animate-header">SIGNTALKER</div>
 </head>
@@ -33,18 +33,19 @@
 
 <div>
     <div class="login_box animate-box"></div>
-    <div class="welcome_sign animate-box">Welcome</div>
+    <div class="sign_please animate-box">Please sign up.</div>
     <a href="main.html">
-        <button id="continueButton" class="continue_button animate-box" onclick="hideEllips()">CONTINUE</button>
+        <input type="submit" class="sign_button animate-box" value="SIGN UP">
     </a>
 
     <div>
-        <input type ="password" class="password_box_input animate-box" placeholder="password"></input>
-        <input type ="text" class="username_box_input animate-box" placeholder="username"></input>
-        <a href="sign_up.html">
-            <button class="sign_up_sign animate-box">Don't have an account ? Sign up</button>
-        </a>
-
+        <input type ="text" id="user" class="username_box_input animate-box" placeholder="username"></input>
+    </div>
+    <div>
+        <input type ="password" id="pass" class="password_box_input animate-box" placeholder="password"></input>
+    </div>
+    <div>
+        <input type="password" id="confirm" class="confirm_password_box_input animate-box" placeholder="confirm password">
     </div>
 
 </div>
