@@ -372,11 +372,11 @@
     z-index: 2;
     text-align: center;
     font-size: 1.4vw;
-    font-family: monospace;
+    font-family: 'Inter';
     line-height: 6vh;
 }
 .continue_button:hover {
-    background-color: #006D77;
+    background-color: #E29578;
     color: white;
 }
 
@@ -438,6 +438,7 @@
     color: rgba(255, 255, 255, 0.75);
     background: #006D77;
     border-width: 0;
+    cursor: pointer;
 }
 .sign_up_sign:hover {
     color: white;
@@ -472,6 +473,10 @@
     font-size: 2.08vw;
     line-height: 8.5vh;
     color: #000000;
+    cursor: pointer;
+    border-width: 0;
+    background-color: #EDF6F9;
+    text-align: start;
 }
 
 

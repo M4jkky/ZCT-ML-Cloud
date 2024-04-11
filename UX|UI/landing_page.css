@@ -155,12 +155,17 @@
     height: 8vh;
     left: 3.75vw;
     top: 3vh;
+    margin: auto;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 2.08vw;
-    line-height: 8.5vh;
+    line-height: 8vh;
     color: #000000;
+    border-width: 0;
+    background-color: #EDF6F9;
+    text-align: start;
+    cursor: pointer;
 }
 
 /* EMPOWERING COMMUNICATION THROUGH SIGN LANGUAGE */
@@ -192,6 +197,7 @@
     z-index: 2;
     text-align: center;
     font-size: 1.4vw;
+    cursor: pointer;
 }
 
 .button1:hover {

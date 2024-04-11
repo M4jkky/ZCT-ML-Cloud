@@ -5,9 +5,11 @@ startPauseButton.addEventListener('click', function() {
     if (startPauseButton.innerText === 'START') {
         startPauseButton.innerText = 'PAUSE';
         startPauseButton.classList.add('started')
+
     } else {
         startPauseButton.innerText = 'START';
-        startPauseButton.classList.remove('started');
+        startPauseButton.classList.remove('started')
+
     }
 });
 
