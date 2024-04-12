@@ -31,8 +31,9 @@
     <div class="ellipse21 animate-ellipse-left"></div>
     <div class="ellipse22 animate-ellipse-right"></div>
     <!---<div class="button1"></div>-->
+    <!-- Video box -->
     <div class="video_box animate-box">
-            <img src="{{ url_for('video_feed') }}" alt="Video Feed">
+        <video id="webcam" autoplay playsinline></video>
     </div>
     <!-- Text box -->
     <div class="text_box animate-box"></div>
@@ -56,6 +57,57 @@
         heartRateElement.innerText = data.value;
         heartRateElement.style.animation = 'scaleUp 0.5s ease-in-out';
     });
+
+    // Video capture from webcam
+    var video = document.getElementById('webcam');
+    var recordedChunks = [];
+    var mediaRecorder = null;
+
+    if (navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                video.srcObject = stream;
+
+                // Start recording
+                mediaRecorder = new MediaRecorder(stream);
+                mediaRecorder.ondataavailable = function(e) {
+                    if (e.data.size > 0) {
+                        recordedChunks.push(e.data);
+                    }
+                };
+                mediaRecorder.start(200); // For every 200ms the stream data will be available
+            })
+            .catch(function (error) {
+                console.log("Something went wrong!");
+            });
+    }
+
+    // Function to send video to server
+    function sendVideoToServer() {
+        var blob = new Blob(recordedChunks, {
+            type: 'video/webm'
+        });
+
+        var formData = new FormData();
+        formData.append('video', blob);
+
+        fetch('/upload_video', {
+            method: 'POST',
+            body: formData
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        }).then(data => {
+            console.log(data);
+        }).catch(e => {
+            console.log('There was a problem with the fetch operation: ' + e.message);
+        });
+
+        // Clear recorded chunks
+        recordedChunks = [];
+    }
 </script>
  </body>
  </html>

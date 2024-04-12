@@ -173,6 +173,33 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+def process_video(video_data):
+    # Convert the binary data to a numpy array
+    video_data = np.frombuffer(video_data, np.uint8)
+
+    # Load the data as a cv2.VideoCapture object
+    video = cv2.imdecode(video_data, cv2.IMREAD_COLOR)
+
+    # Process the video frame by frame
+    while True:
+        ret, frame = video.read()
+        if not ret:
+            break
+
+        # Process the frame here
+        extract_hand_landmarks(frame)
+
+@app.route('/upload_video', methods=['POST'])
+@login_required
+def upload_video():
+    video_file = request.files['video']  # get the video file from the request
+    video_data = video_file.read()  # read the video data
+
+    # Process the video
+    process_video(video_data)
+
+    return 'Video processed successfully'
+
 
 
 @app.route('/start_process', methods=['POST'])
