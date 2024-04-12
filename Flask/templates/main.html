@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/static/main.css">
+    <div class="header2 animate-header"></div>
+    <a href="/">
+        <button class="header_sign animate-header">SIGNTALKER</button>
+    </a>
+    <a href="/logout">
+        <button class="logout animate-header">Log out</button>
+    </a>
+
+</head>
+<body class="body">
+
+<div class="container">
+    <!-- Ellipse 1 -->
+    <div class="ellipse11 animate-ellipse-right"></div>
+    <div class="ellipse12 animate-ellipse-right"></div>
+    <div class="ellipse13 animate-ellipse-left"></div>
+    <div class="ellipse14 animate-ellipse-right"></div>
+    <div class="ellipse15 animate-ellipse-left"></div>
+    <div class="ellipse16 animate-ellipse-right"></div>
+    <div class="ellipse17 animate-ellipse-left"></div>
+    <div class="ellipse18 animate-ellipse-right"></div>
+    <div class="ellipse19 animate-ellipse-right"></div>
+    <div class="ellipse20 animate-ellipse-left"></div>
+    <div class="ellipse21 animate-ellipse-left"></div>
+    <div class="ellipse22 animate-ellipse-right"></div>
+    <!---<div class="button1"></div>-->
+    <div class="video_box animate-box">
+            <img src="{{ url_for('video_feed') }}" alt="Video Feed">
+    </div>
+    <!-- Text box -->
+    <div class="text_box animate-box"></div>
+    <div class="text_box_p animate-box">
+            <p>Sentence: <span id="Sentence">Loading...</span></p>
+    </div>
+
+
+ </div>
+
+ <button class="start_button animate-box " id="startPauseButton">PAUSE</button>
+ <button class="language_button animate-box " id="LanguageButton" onclick="toggleLanguage()">Slovak</button>
+ <script src="/static/main.js"></script>
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script src="/static/main.js"></script>
+<script>
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+    socket.on('sentence', function (data) {
+        var heartRateElement = document.getElementById('Sentence');
+        heartRateElement.innerText = data.value;
+        heartRateElement.style.animation = 'scaleUp 0.5s ease-in-out';
+    });
+</script>
+ </body>
+ </html>
