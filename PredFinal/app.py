@@ -218,6 +218,7 @@ def receive_image(image):
 
 
 @app.route("/index") # toto potom treba prerobiť na našu main stránku, ale opatrne - pozor zitra
+@login_required
 def index():
     """
     The index function returns the index.html template, which is a landing page for users.
