@@ -128,7 +128,7 @@ def login():
                 print("Password is correct")
                 user_obj = User(id=user[0], username=user[1], password=user[2])
                 login_user(user_obj, remember=True)
-                return redirect(url_for('index'))
+                return redirect(url_for('main_web'))
             else:
                 print("Password is incorrect")
         else:
@@ -171,7 +171,7 @@ def signup():
 
             login_user(user_obj, remember=True)
 
-            return redirect(url_for('index'))
+            return redirect(url_for('main_web'))
 
         cur.close()
 
@@ -345,7 +345,7 @@ def start_process():
 
 
 @app.route('/main')
-#@login_required
+@login_required
 def main_web():
     return render_template('main.html', user=current_user)
 

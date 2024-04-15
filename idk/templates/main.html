@@ -31,7 +31,7 @@
 </div>
 <p>Sentence: <span id="Sentence">Loading...</span></p>
 <script>
-    var socket = io.connect('http://' + document.domain + ':' + location.port);
+    var socket = io.connect('https://' + document.domain + ':' + location.port);
     socket.on('sentence', function (data) {
         var sentenceElement = document.getElementById('Sentence');
         sentenceElement.innerText = data.value;
