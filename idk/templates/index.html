@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Processing App</title>
+</head>
+<body>
+    <h1>Image Processing App</h1>
+    <form action="/process_image" method="post" enctype="multipart/form-data">
+        <label for="file">Choose an image to upload:</label>
+        <input type="file" id="file" name="file" accept="image/*">
+        <input type="submit" value="Upload Image">
+    </form>
+    <h2>Processed Image:</h2>
+    {% if img_data %}
+        <img src="{{ img_data }}" alt="Processed Image">
+    {% else %}
+        <p>No image processed yet.</p>
+    {% endif %}
+</body>
+</html>
