@@ -4,11 +4,13 @@ import cv2
 import json
 import pygame
 import base64
+import pickle
 import psycopg2
 import threading
 import time
 import numpy as np
 import urllib.request
+from PIL import Image
 from gtts import gTTS
 import mediapipe as mp
 from io import BytesIO
@@ -56,6 +58,14 @@ except FileNotFoundError:
     exit(1)
 except json.JSONDecodeError:
     print("JSON file is not properly formatted.")
+    exit(1)
+
+# Load the model from pickle file
+try:
+    model_dict = pickle.load(open('misc/model.pkl', 'rb'))
+    model = model_dict['model']
+except FileNotFoundError:
+    print("Model file not found. Please ensure the file path is correct.")
     exit(1)
 
 hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3)
@@ -184,186 +194,17 @@ def logout():
     return redirect(url_for('landing'))
 
 
-def base64_to_image(base64_string):
-    """
-    The base64_to_image function accepts a base64 encoded string and returns an image.
-    The function extracts the base64 binary data from the input string, decodes it, converts 
-    the bytes to numpy array, and then decodes the numpy array as an image using OpenCV.
-    
-    :param base64_string: Pass the base64 encoded image string to the function
-    :return: An image
-    """
-    base64_data = base64_string.split(",")[1]
-    image_bytes = base64.b64decode(base64_data)
-    image_array = np.frombuffer(image_bytes, dtype=np.uint8)
-    image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
-    return image
-
-
-@socketio.on("connect")
-def test_connect():
-    """
-    The test_connect function is used to test the connection between the client and server.
-    It sends a message to the client letting it know that it has successfully connected.
-    
-    :return: A 'connected' string
-    """
-    print("Connected")
-    emit("my response", {"data": "Connected"})
-
-
-
-
-@socketio.on("image")
-def receive_image(image):
-    global status
-    global language
-    global no_hand_counter
-    global last_predicted_character
-    global sentence
-    global hold_counter
-    global previous_sentence
-    global predicted_character_counter
-    """
-    The receive_image function takes in an image from the webcam, converts it to grayscale, and then emits
-    the processed image back to the client.
-
-
-    :param image: Pass the image data to the receive_image function
-    :return: The image that was received from the client
-    """
-    # Decode the base64-encoded image data
-    time.sleep(0.5)
-    image = base64_to_image(image)
-    allowSelfSignedHttps(True)
-    if status == 'START':
-        data_aux, x_, y_, H, W = extract_hand_landmarks(image)
-        data_aux_2d = np.array(data_aux).reshape(1, -1)
-
-        if x_:
-            no_hand_counter = 0
-            x1 = int(min(x_) * W) - 2
-            y1 = int(min(y_) * H) - 2
-            x2 = int(max(x_) * W) - 2
-            y2 = int(max(y_) * H) - 2
-
-            try:
-                data = {"data": data_aux_2d.tolist()}
-                body = str.encode(json.dumps(data))
-                req = urllib.request.Request(url, body, headers)
-
-                response = urllib.request.urlopen(req)
-                result = json.loads(response.read())
-                prediction = result[0]
-                predicted_character = labels_dict[str(int(prediction))]
-                displayed_character = predicted_character
-
-                if predicted_character == "Space":
-                    predicted_character = " "
-                    displayed_character = "Space"
-
-                if last_predicted_character != predicted_character:
-                    predicted_character_counter = 0
-
-                predicted_character_counter += 1
-                hold_counter += 1
-
-                if predicted_character == "Delete" and predicted_character_counter > threshold:
-                    predicted_character = ""
-                    if sentence.endswith("Hello"):
-                        sentence = sentence[:-5]
-                    elif sentence.endswith("ILY"):
-                        sentence = sentence[:-3]
-                    elif sentence.endswith("PEWPEW"):
-                        sentence = sentence[:-6]
-                    else:
-                        sentence = sentence[:-1]
-                    displayed_character = "Delete"
-
-                cv2.rectangle(image, (x1, y1), (x2, y2), (0, 0, 0), 1)
-                if predicted_character != " ":
-                    cv2.putText(image, predicted_character, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.3, (0, 0, 0),
-                                2, cv2.LINE_AA)
-                    socketio.emit('character', {'value': predicted_character})
-                else:
-                    cv2.putText(image, displayed_character, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.3, (0, 0, 0),
-                                2, cv2.LINE_AA)
-                    socketio.emit('character', {'value': displayed_character})
-
-                if not sentence and predicted_character_counter > threshold:
-                    sentence += predicted_character
-                    predicted_character_counter = 0
-                elif predicted_character_counter > threshold:
-                    sentence += predicted_character
-                    predicted_character_counter = 0
-
-                if sentence != previous_sentence:
-                    sentence = sentence.lower()
-                    socketio.emit('sentence', {'value': sentence})
-                    print(sentence)
-                    previous_sentence = sentence
-
-                if hold_counter > 10:
-                    last_predicted_character = predicted_character
-                    hold_counter = 0
-
-                hold_counter += 1
-
-            except urllib.error.HTTPError as error:
-                print("The request failed with status code: " + str(error.code))
-                print(error.info())
-                print(error.read().decode("utf8", 'ignore'))
-
-        else:
-            no_hand_counter += 1
-
-        if no_hand_counter >= 30 and sentence != "":
-            speak(sentence, language)
-            sentence = ""
-            no_hand_counter = 0
-        encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
-        result, frame_encoded = cv2.imencode(".jpg", image, encode_param)
-        processed_img_data = base64.b64encode(frame_encoded).decode()
-        b64_src = "data:image/jpg;base64,"
-        processed_img_data = b64_src + processed_img_data
-        emit("processed_image", processed_img_data)
-    else:
-        encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
-        result, frame_encoded = cv2.imencode(".jpg", image, encode_param)
-        processed_img_data = base64.b64encode(frame_encoded).decode()
-        b64_src = "data:image/jpg;base64,"
-        processed_img_data = b64_src + processed_img_data
-        emit("processed_image", processed_img_data)
-
-
-@app.route('/start_process', methods=['POST'])
-@login_required
-def start_process():
-    global language
-    language = request.json.get('language')
-    return 'Process started successfully'
-
-
 @app.route('/main')
 @login_required
 def main_web():
     return render_template('main.html', user=current_user)
-
-@app.route('/toggle', methods=['POST'])
-@login_required
-def toggle():
-    global status
-    status = request.json.get('status')
-    if status == 'START':
-        return {'status': 'PAUSE', 'message': 'Process toggled successfully'}
-    else:
-        return {'status': 'START', 'message': 'Process toggled successfully'}
 
 def extract_hand_landmarks(frame):
     data_aux = []
     x_ = []
     y_ = []
 
+    frame = np.array(frame)
     h, w, _ = frame.shape
 
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -393,6 +234,116 @@ def extract_hand_landmarks(frame):
 
     return data_aux, x_, y_, h, w
 
+def process_image(input_img):
+    # Initialize necessary variables
+    no_hand_counter = 0
+    predicted_character_counter = 0
+    hold_counter = 0
+    last_predicted_character = ""
+    sentence = ""
+    previous_sentence = ""
+    threshold = 10  # Adjust threshold as needed
+
+    input_img = np.asarray(input_img)
+
+    # Extract hand landmarks from the input image
+    data_aux, x_, y_, H, W = extract_hand_landmarks(input_img)
+
+    if x_:
+        x1 = int(min(x_) * W) - 2
+        y1 = int(min(y_) * H) - 2
+        x2 = int(max(x_) * W) - 2
+        y2 = int(max(y_) * H) - 2
+
+        try:
+            data_aux_2d = np.array(data_aux).reshape(1, -1)
+            # Perform prediction using your model
+            # Replace model.predict with your actual prediction code
+            prediction = model.predict(data_aux_2d)
+            predicted_character = labels_dict[str(int(prediction))]
+            displayed_character = predicted_character
+
+            if predicted_character == "Space":
+                predicted_character = " "
+                displayed_character = "Space"
+
+            if last_predicted_character != predicted_character:
+                predicted_character_counter = 0
+
+            predicted_character_counter += 1
+            hold_counter += 1
+
+            if predicted_character == "Delete" and predicted_character_counter > threshold:
+                predicted_character = ""
+                # Update sentence based on the prediction
+                # Adjust this part according to your actual logic
+                if sentence.endswith("Hello"):
+                    sentence = sentence[:-5]
+                elif sentence.endswith("ILY"):
+                    sentence = sentence[:-3]
+                elif sentence.endswith("PEWPEW"):
+                    sentence = sentence[:-6]
+                else:
+                    sentence = sentence[:-1]
+                displayed_character = "Delete"
+
+            cv2.rectangle(input_img, (x1, y1), (x2, y2), (0, 0, 0), 1)
+            if predicted_character != " ":
+                cv2.putText(input_img, predicted_character, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.3, (0, 0, 0), 2,
+                            cv2.LINE_AA)
+            else:
+                cv2.putText(input_img, displayed_character, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.3, (0, 0, 0), 2,
+                            cv2.LINE_AA)
+
+            if not sentence and predicted_character_counter > threshold and displayed_character != "Delete":
+                sentence += predicted_character
+                predicted_character_counter = 0
+            elif predicted_character_counter > threshold:
+                sentence += predicted_character
+                predicted_character_counter = 0
+
+            if sentence != previous_sentence:
+                print(sentence)
+                previous_sentence = sentence
+
+            if hold_counter > 10:
+                last_predicted_character = predicted_character
+                hold_counter = 0
+
+        except ValueError as e:
+            print(f"An error occurred: {e}")
+    else:
+        no_hand_counter += 1
+
+    if no_hand_counter >= 30 and sentence != "":
+        sentence = ""
+        no_hand_counter = 0
+
+    return input_img
+
+from flask import render_template_string
+import base64
+
+@app.route('/index', methods=['GET', 'POST'])
+#@login_required
+def upload_file():
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return 'No file uploaded', 400
+        file = request.files['file']
+        if file.filename == '':
+            return 'No file selected', 400
+        if file:
+            input_image = Image.open(file.stream)
+            output_image = process_image(input_image)
+            img_io = BytesIO()
+            output_image.save(img_io, 'PNG')
+            img_io.seek(0)
+            img_data = base64.b64encode(img_io.getvalue()).decode('ascii')
+            img_data = "data:image/png;base64," + img_data
+            return render_template('index.html', img_data=img_data)
+    return render_template('index.html')
+
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True, port=80, host='0.0.0.0')
+    app.run(app, debug=True, port=80, host='0.0.0.0')
