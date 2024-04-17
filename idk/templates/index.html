@@ -2,19 +2,49 @@
 <html>
 <head>
     <title>Image Processing App</title>
+    <link rel="stylesheet" href="/static/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div class="header2 animate-header"></div>
+    <a href="/">
+        <button class="header_sign animate-header">SIGNTALKER</button>
+    </a>
 </head>
-<body>
-    <h1>Image Processing App</h1>
+<body class="body">
+    <!---<h1>Image Processing App</h1>--->
     <form action="/process_image" method="post" enctype="multipart/form-data">
-        <label for="file">Choose an image to upload:</label>
-        <input type="file" id="file" name="file" accept="image/*">
-        <input type="submit" value="Upload Image">
+        <label class="start_button animate-box" for="file">Choose an image to upload:</label>
+        <input type="file" id="file" name="file" accept="image/*" style="display: none;">
+        <input class="language_button animate-box" type="submit" value="Upload Image">
     </form>
+    <!---
     <h2>Processed Image:</h2>
     {% if img_data %}
         <img src="{{ img_data }}" alt="Processed Image">
     {% else %}
         <p>No image processed yet.</p>
     {% endif %}
+    --->
+
+<div class="container">
+    <!-- Ellipse 1 -->
+    <div class="ellipse11 animate-ellipse-right"></div>
+    <div class="ellipse12 animate-ellipse-right"></div>
+    <div class="ellipse13 animate-ellipse-left"></div>
+    <div class="ellipse14 animate-ellipse-right"></div>
+    <div class="ellipse15 animate-ellipse-left"></div>
+    <div class="ellipse16 animate-ellipse-right"></div>
+    <div class="ellipse17 animate-ellipse-left"></div>
+    <div class="ellipse18 animate-ellipse-right"></div>
+    <div class="ellipse19 animate-ellipse-right"></div>
+    <div class="ellipse20 animate-ellipse-left"></div>
+    <div class="ellipse21 animate-ellipse-left"></div>
+    <div class="ellipse22 animate-ellipse-right"></div>
+    <!---<div class="button1"></div>-->
+     <div class="video_box animate-box"></div>
+
+
+
+ </div>
+
 </body>
 </html>
