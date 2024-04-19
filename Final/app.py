@@ -2,17 +2,19 @@ import os
 import ssl
 import cv2
 import json
+import base64
 import pickle
 import psycopg2
 import numpy as np
 import urllib.request
-from PIL import Image
 import mediapipe as mp
+
+from PIL import Image
 from flask_socketio import SocketIO
+from flask import Flask, render_template, request, url_for, redirect
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, LoginManager, UserMixin, current_user
-from flask import Flask, render_template,request, url_for, redirect
-import base64
+
 
 # Initialize Flask app
 app = Flask(__name__, static_folder="./templates/static")
@@ -34,7 +36,8 @@ hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3)
 model_name = 'final-model-3-11'
 url = 'https://zct2-final-endpoint.westeurope.inference.ml.azure.com/score'
 api_key = '9ujbbJ6hNk0X4FhHOuwXVnO9bOdvEbtO'
-headers = {'Content-Type': 'application/json', 'Authorization': ('Bearer ' + api_key), 'azureml-model-deployment': model_name}
+headers = {'Content-Type': 'application/json', 'Authorization': ('Bearer ' + api_key),
+           'azureml-model-deployment': model_name}
 
 
 class User(UserMixin):
@@ -42,6 +45,7 @@ class User(UserMixin):
         self.id = id
         self.username = username
         self.password = password
+
 
 # Load labels dictionary
 try:
@@ -62,6 +66,7 @@ except FileNotFoundError:
     print("Model file not found. Please ensure the file path is correct.")
     exit(1)
 
+
 # AWS database connection details
 def connect_to_db():
     conn = psycopg2.connect(
@@ -72,6 +77,7 @@ def connect_to_db():
         port="5432"
     )
     return conn
+
 
 # Flask-Login user loader
 @login_manager.user_loader
@@ -86,15 +92,18 @@ def load_user(user_id):
     else:
         return None
 
+
 # Helper function to allow self-signed HTTPS
 def allowSelfSignedHttps(allowed):
     if allowed and not os.environ.get('PYTHONHTTPSVERIFY', '') and getattr(ssl, '_create_unverified_context', None):
         ssl._create_default_https_context = ssl._create_unverified_context
 
+
 # Landing page route
 @app.route('/')
 def landing():
     return render_template('landing_page.html')
+
 
 # Login route
 @app.route('/login', methods=['GET', 'POST'])
@@ -120,6 +129,7 @@ def login():
         cur.close()
 
     return render_template("login.html", user=current_user)
+
 
 # Signup route
 @app.route('/signup', methods=['GET', 'POST'])
@@ -157,12 +167,14 @@ def signup():
 
     return render_template('sign_up.html', user=current_user)
 
+
 # Logout route
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('landing'))
+
 
 def extract_hand_landmarks(frame):
     data_aux = []
@@ -198,6 +210,7 @@ def extract_hand_landmarks(frame):
 
     return data_aux, x_, y_, h, w
 
+
 def process_image1(input_img):
     data_aux, x_, y_, H, W = extract_hand_landmarks(input_img)
     data_aux_2d = np.array(data_aux).reshape(1, -1)
@@ -229,6 +242,7 @@ def process_image1(input_img):
             print(error.read().decode("utf8", 'ignore'))
 
     return input_img
+
 
 @app.route('/index')
 @login_required

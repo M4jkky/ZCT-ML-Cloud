@@ -492,3 +492,7 @@
         transform: translateY(0);
     }
 }
+
+.continue_button:hover {
+    cursor: pointer;
+}
