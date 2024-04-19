@@ -156,7 +156,7 @@
     left: 3.75vw;
     top: 3vh;
     margin: auto;
-    font-family: 'Inter';
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
     font-style: normal;
     font-weight: 400;
     font-size: 2.08vw;
@@ -175,7 +175,7 @@
     height: 36vh;
     left: 12vw;
     top: 30vh;
-    font-family: 'Inter';
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
     font-style: normal;
     font-weight: 400;
     font-size: 4vw;

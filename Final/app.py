@@ -32,8 +32,8 @@ hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3)
 
 # Azure ML model deployment details
 model_name = 'final-model-3-11'
-url = 'https://zct-zadanie-2-rchbb.westeurope.inference.ml.azure.com/score'
-api_key = '0tqsDiQ1ygBfw88ocgsXO3ebUTYcVEbD'
+url = 'https://zct2-final-endpoint.westeurope.inference.ml.azure.com/score'
+api_key = '9ujbbJ6hNk0X4FhHOuwXVnO9bOdvEbtO'
 headers = {'Content-Type': 'application/json', 'Authorization': ('Bearer ' + api_key), 'azureml-model-deployment': model_name}
 
 
@@ -113,7 +113,7 @@ def login():
             print("Password is correct")
             user_obj = User(id=user[0], username=user[1], password=user[2])
             login_user(user_obj, remember=True)
-            return redirect(url_for('main_web'))
+            return redirect(url_for('index'))
         else:
             print("Invalid username or password")
 
@@ -151,7 +151,7 @@ def signup():
 
             login_user(user_obj, remember=True)
 
-            return redirect(url_for('main_web'))
+            return redirect(url_for('index'))
 
         cur.close()
 
@@ -163,12 +163,6 @@ def signup():
 def logout():
     logout_user()
     return redirect(url_for('landing'))
-
-# Main page route
-@app.route('/main')
-@login_required
-def main_web():
-    return render_template('main.html', user=current_user)
 
 def extract_hand_landmarks(frame):
     data_aux = []
@@ -237,6 +231,7 @@ def process_image1(input_img):
     return input_img
 
 @app.route('/index')
+@login_required
 def index():
     return render_template('index.html', img_data=None)
 
@@ -269,3 +264,6 @@ def process_image():
 
 if __name__ == "__main__":
     app.run(debug=True, port=80, host='0.0.0.0')
+
+#docker tag <image>:latest gcr.io/<projectID>/<image>:latest
+#docker push gcr.io/<projectID>/<image>:latest
