@@ -11,3 +11,14 @@ To-Do List:
   - [x] P: Flask backend 
   - [x] P: Spojiť model (Azure ML) do backend-u
   - [x] M F P J: Úpravy, doťuky všetkého. Každý všetko (backend, frontend, model, atď.)
+
+## American Sign Language (ASL)
+![ASL.jpeg](Figures/ASL.jpeg)
+
+# SINGTALKER
+## not so talkative, but very useful (hopefully)
+![landing_page.png](Figures/landing_page.png)
+![login.png](Figures/login.png)
+![upload.png](Figures/upload.png)
+![ily.png](Figures/ily.png)
+![pewpew.png](Figures/pewpew.png)
